@@ -6,4 +6,6 @@
     <string name="input_pw">비밀번호 입력</string>
     <string name="save">저장</string>
     <string name="input_content">내용 입력</string>
+    <string name="modify">편집</string>
+    <string name="memo_lock_state">메모 비공개/공개</string>
 </resources>
