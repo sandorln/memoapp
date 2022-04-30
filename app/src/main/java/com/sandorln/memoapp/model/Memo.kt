@@ -5,8 +5,8 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class Memo(
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     var id: Int = 0,
     val content: String,
-    val pwd: String
+    val pwd: String = ""
 )

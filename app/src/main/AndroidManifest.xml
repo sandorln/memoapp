@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Memoapp">
         <activity
-            android:name=".MemoListActivity"
+            android:name=".ui.activity.MemoListActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

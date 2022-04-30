@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">memoapp</string>
+    <string name="search_memo">메모 검색</string>
 </resources>

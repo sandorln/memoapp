@@ -1,18 +1,47 @@
 package com.sandorln.memoapp.ui.activity
 
+import androidx.activity.viewModels
+import androidx.core.widget.doOnTextChanged
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.sandorln.memoapp.R
 import com.sandorln.memoapp.databinding.ActivityMemoListBinding
+import com.sandorln.memoapp.ui.adapter.MemoAdapter
 import com.sandorln.memoapp.ui.base.BaseActivity
+import com.sandorln.memoapp.viewmodel.MemoViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MemoListActivity : BaseActivity<ActivityMemoListBinding>(R.layout.activity_memo_list) {
+    /* ViewModels */
+    private val memoViewModel: MemoViewModel by viewModels()
+
+    /* Adapters */
+    private lateinit var memoAdapter: MemoAdapter
+
     override fun initObjectSetting() {
+        memoAdapter = MemoAdapter {
+            memoViewModel.deleteMemo(it)
+        }
     }
 
     override fun initViewSetting() {
+        binding.rvMemo.adapter = memoAdapter
+        binding.editSearch.doOnTextChanged { text, _, _, _ -> memoViewModel.changeSearch(text.toString()) }
     }
 
     override fun initObserverSetting() {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                launch {
+                    memoViewModel
+                        .memoList
+                        .collect { memoList -> memoAdapter.submitList(memoList) }
+                }
+            }
+        }
     }
 }
