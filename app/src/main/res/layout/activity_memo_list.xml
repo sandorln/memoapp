@@ -37,5 +37,13 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/input_layout_search"
             tools:listitem="@layout/item_memo" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:contentDescription="@string/write_memo"
+            android:id="@+id/fab_write_memo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="20dp" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

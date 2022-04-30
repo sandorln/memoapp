@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface MemoDao {
-    @Query("SELECT * FROM Memo WHERE content LIKE '%' || :search || '%' ORDER BY id DESC")
+    @Query("SELECT * FROM Memo WHERE content LIKE '%' || :search || '%' OR title LIKE '%' || :search || '%' ORDER BY id DESC")
     fun getMemoList(search: String): Flow<List<Memo>>
 
     @Insert(onConflict = REPLACE)

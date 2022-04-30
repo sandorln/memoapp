@@ -13,8 +13,12 @@ class MemoAdapter(private val onClickListener: (Memo) -> Unit) : ListAdapter<Mem
         MemoViewHolder(ItemMemoBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 
     override fun onBindViewHolder(holder: MemoViewHolder, position: Int) {
-        holder.binding.tvMemo.text = getItem(position).content
-        holder.itemView.setOnClickListener { onClickListener(getItem(position)) }
+        val memo = getItem(position)
+        if (memo.pwd.isNotEmpty())
+            holder.binding.tvMemo.text = "비밀 메모입니다"
+        else
+            holder.binding.tvMemo.text = memo.title
+        holder.itemView.setOnClickListener { onClickListener(memo) }
     }
 
     class MemoViewHolder(val binding: ItemMemoBinding) : RecyclerView.ViewHolder(binding.root)
