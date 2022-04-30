@@ -18,4 +18,7 @@ interface MemoDao {
 
     @Update
     suspend fun updateMemo(memo: Memo)
+
+    @Query("SELECT * FROM Memo WHERE id == :id")
+    fun getMemoById(id: String): Memo
 }

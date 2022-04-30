@@ -22,6 +22,9 @@
         <activity
             android:name=".ui.activity.MemoEditorActivity"
             android:exported="true" />
+        <activity
+            android:name=".ui.activity.MemoDetailActivity"
+            android:exported="true" />
     </application>
 
 </manifest>

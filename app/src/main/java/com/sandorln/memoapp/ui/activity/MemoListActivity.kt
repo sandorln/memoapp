@@ -14,7 +14,6 @@ import com.sandorln.memoapp.viewmodel.MemoViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
-import java.io.Serializable
 
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
@@ -27,7 +26,7 @@ class MemoListActivity : BaseActivity<ActivityMemoListBinding>(R.layout.activity
 
     override fun initObjectSetting() {
         memoAdapter = MemoAdapter { memo ->
-            val intent = Intent(this, MemoEditorActivity::class.java).apply { putExtra("memo", memo as Serializable) }
+            val intent = Intent(this, MemoDetailActivity::class.java).apply { putExtra("memoId", memo.id.toString()) }
             startActivity(intent)
         }
     }
