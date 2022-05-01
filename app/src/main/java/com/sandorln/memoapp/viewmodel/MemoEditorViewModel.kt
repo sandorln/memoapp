@@ -6,6 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.asFlow
 import androidx.lifecycle.viewModelScope
+import com.sandorln.memoapp.model.BundleKey
 import com.sandorln.memoapp.model.Memo
 import com.sandorln.memoapp.usecase.InsertMemoUseCase
 import com.sandorln.memoapp.usecase.UpdateMemoUseCase
@@ -36,7 +37,7 @@ class MemoEditorViewModel @Inject constructor(
             updateMemoUseCase(memo.copy(title = title, content = content, pwd = pwd))
     }
 
-    val initMemo = savedStateHandle.getLiveData<Memo>("memo").asFlow().stateIn(viewModelScope, SharingStarted.WhileSubscribed(), null)
+    val initMemo = savedStateHandle.getLiveData<Memo>(BundleKey.MEMO).asFlow().stateIn(viewModelScope, SharingStarted.WhileSubscribed(), null)
     private val _memoTitle: MutableStateFlow<String> = MutableStateFlow("")
     fun changeMemoTitle(memoTitle: String) = viewModelScope.launch(Dispatchers.IO) { _memoTitle.emit(memoTitle) }
     private val _memoContent: MutableStateFlow<String> = MutableStateFlow("")

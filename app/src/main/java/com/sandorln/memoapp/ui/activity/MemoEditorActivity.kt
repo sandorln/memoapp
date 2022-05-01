@@ -32,11 +32,10 @@ class MemoEditorActivity : BaseActivity<ActivityMemoEditorBinding>(R.layout.acti
         binding.tvSave.setOnClickListener {
             lifecycleScope.launchWhenResumed {
                 memoEditorViewModel.saveMemo()
+                showToast("완료 되었습니다")
                 finish()
                 if (memoEditorViewModel.initMemo.value != null)
                     overridePendingTransition(0, 0)
-
-                showToast("완료 되었습니다")
             }
         }
         binding.imgRollback.setOnClickListener {

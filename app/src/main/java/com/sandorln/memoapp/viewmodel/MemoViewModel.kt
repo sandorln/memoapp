@@ -5,6 +5,7 @@ import android.content.Context
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
+import com.sandorln.memoapp.model.BundleKey
 import com.sandorln.memoapp.usecase.CheckValidMemoPwUseCase
 import com.sandorln.memoapp.usecase.GetMemoListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -33,6 +34,6 @@ class MemoViewModel @Inject constructor(
         .flatMapLatest { search -> getMemoListUseCase(search) }
         .flowOn(Dispatchers.IO)
 
-    val memoId = savedStateHandle.get<String>("memoId") ?: ""
+    val memoId = savedStateHandle.get<String>(BundleKey.MEMO_ID) ?: ""
     suspend fun checkValidMemo(memoId: String, memoPw: String) = withContext(Dispatchers.IO) { checkValidMemoPwUseCase(memoId, memoPw) }
 }

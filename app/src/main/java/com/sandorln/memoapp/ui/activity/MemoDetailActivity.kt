@@ -1,13 +1,13 @@
 package com.sandorln.memoapp.ui.activity
 
 import android.content.Intent
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.sandorln.memoapp.R
 import com.sandorln.memoapp.databinding.ActivityMemoDetailBinding
+import com.sandorln.memoapp.model.BundleKey
 import com.sandorln.memoapp.ui.base.BaseActivity
 import com.sandorln.memoapp.viewmodel.MemoDetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,7 +29,7 @@ class MemoDetailActivity : BaseActivity<ActivityMemoDetailBinding>(R.layout.acti
         binding.tvEditor.setOnClickListener {
             lifecycleScope.launchWhenResumed {
                 val memo = memoDetailViewModel.memo.firstOrNull()
-                val intent = Intent(this@MemoDetailActivity, MemoEditorActivity::class.java).apply { putExtra("memo", memo as Serializable) }
+                val intent = Intent(this@MemoDetailActivity, MemoEditorActivity::class.java).apply { putExtra(BundleKey.MEMO, memo as Serializable) }
                 startActivity(intent)
                 overridePendingTransition(0, 0)
             }
@@ -50,7 +50,7 @@ class MemoDetailActivity : BaseActivity<ActivityMemoDetailBinding>(R.layout.acti
                 memoDetailViewModel
                     .memo
                     .catch {
-                        Toast.makeText(this@MemoDetailActivity, "해당 메모를 찾을 수 없습니다", Toast.LENGTH_SHORT).show()
+                        showToast("해당 메모를 찾을 수 없습니다")
                         finish()
                     }
                     .collectLatest { memo ->

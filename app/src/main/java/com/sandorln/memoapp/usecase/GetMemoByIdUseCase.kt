@@ -8,8 +8,6 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
 
-class GetMemoByIdUseCase @Inject constructor(
-    private val memoRepository: MemoRepository
-) {
+class GetMemoByIdUseCase @Inject constructor(private val memoRepository: MemoRepository) {
     operator fun invoke(memoId: String): Flow<Memo> = flow { emit(memoRepository.getMemoById(memoId)) }.flowOn(Dispatchers.IO)
 }

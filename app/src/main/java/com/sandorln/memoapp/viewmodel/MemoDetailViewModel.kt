@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.SavedStateHandle
+import com.sandorln.memoapp.model.BundleKey
 import com.sandorln.memoapp.usecase.DeleteMemoUseCase
 import com.sandorln.memoapp.usecase.GetMemoByIdUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,6 +19,6 @@ class MemoDetailViewModel @Inject constructor(
     getMemoByIdUseCase: GetMemoByIdUseCase,
     private val deleteMemoUseCase: DeleteMemoUseCase,
 ) : AndroidViewModel(context as Application) {
-    val memo = getMemoByIdUseCase(savedStateHandle.get<String>("memoId") ?: "")
+    val memo = getMemoByIdUseCase(savedStateHandle.get<String>(BundleKey.MEMO_ID) ?: "")
     suspend fun deleteMemo() = deleteMemoUseCase(memo = memo.first())
 }

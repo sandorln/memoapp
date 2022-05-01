@@ -11,6 +11,7 @@ import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
 import com.sandorln.memoapp.R
 import com.sandorln.memoapp.databinding.ActivityMemoListBinding
+import com.sandorln.memoapp.model.BundleKey
 import com.sandorln.memoapp.ui.adapter.MemoAdapter
 import com.sandorln.memoapp.ui.base.BaseActivity
 import com.sandorln.memoapp.ui.dialog.CheckMemoPwValidDialog
@@ -31,7 +32,7 @@ class MemoListActivity : BaseActivity<ActivityMemoListBinding>(R.layout.activity
     override fun initObjectSetting() {
         memoAdapter = MemoAdapter { memo ->
             if (memo.pwd.isEmpty()) {
-                val intent = Intent(this, MemoDetailActivity::class.java).apply { putExtra("memoId", memo.id.toString()) }
+                val intent = Intent(this, MemoDetailActivity::class.java).apply { putExtra(BundleKey.MEMO_ID, memo.id.toString()) }
                 startActivity(intent)
             } else {
                 CheckMemoPwValidDialog

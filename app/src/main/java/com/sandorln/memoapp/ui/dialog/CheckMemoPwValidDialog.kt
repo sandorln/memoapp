@@ -13,6 +13,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.sandorln.memoapp.application.MemoAppApplication
 import com.sandorln.memoapp.databinding.DialogCheckMemoPwValidBinding
+import com.sandorln.memoapp.model.BundleKey
 import com.sandorln.memoapp.ui.activity.MemoDetailActivity
 import com.sandorln.memoapp.viewmodel.MemoViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,7 +29,7 @@ class CheckMemoPwValidDialog : DialogFragment() {
 
     companion object {
         fun newInstance(memoId: String): CheckMemoPwValidDialog {
-            val args = Bundle().apply { putString("memoId", memoId) }
+            val args = Bundle().apply { putString(BundleKey.MEMO_ID, memoId) }
             return CheckMemoPwValidDialog().apply { arguments = args }
         }
     }
@@ -55,7 +56,7 @@ class CheckMemoPwValidDialog : DialogFragment() {
             val memoId = memoViewModel.memoId
             val isValidPw = memoViewModel.checkValidMemo(memoId, binding.editPw.text.toString())
             if (isValidPw) {
-                val intent = Intent(requireContext(), MemoDetailActivity::class.java).apply { putExtra("memoId", memoId) }
+                val intent = Intent(requireContext(), MemoDetailActivity::class.java).apply { putExtra(BundleKey.MEMO_ID, memoId) }
                 startActivity(intent)
             } else {
                 (requireContext().applicationContext as? MemoAppApplication)?.showToast("비밀번호가 틀렸습니다")
