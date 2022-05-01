@@ -34,6 +34,14 @@ class MemoDetailActivity : BaseActivity<ActivityMemoDetailBinding>(R.layout.acti
                 overridePendingTransition(0, 0)
             }
         }
+        binding.tvDelete.setOnClickListener {
+            showAlterDialog("삭제", "주의 : 삭제 시 다시 복원할 수 없습니다", "삭제") {
+                lifecycleScope.launchWhenResumed {
+                    memoDetailViewModel.deleteMemo()
+                    finish()
+                }
+            }
+        }
     }
 
     override fun initObserverSetting() {
@@ -41,7 +49,10 @@ class MemoDetailActivity : BaseActivity<ActivityMemoDetailBinding>(R.layout.acti
             repeatOnLifecycle(Lifecycle.State.RESUMED) {
                 memoDetailViewModel
                     .memo
-                    .catch { Toast.makeText(this@MemoDetailActivity, "해당 메모를 찾을 수 없습니다", Toast.LENGTH_SHORT).show() }
+                    .catch {
+                        Toast.makeText(this@MemoDetailActivity, "해당 메모를 찾을 수 없습니다", Toast.LENGTH_SHORT).show()
+                        finish()
+                    }
                     .collectLatest { memo ->
                         with(binding) {
                             imgMemoLockState.isSelected = memo.pwd.isNotEmpty()

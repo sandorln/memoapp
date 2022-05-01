@@ -38,13 +38,25 @@
                 android:textColorHint="@android:color/darker_gray"
                 android:textSize="13sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/tv_save"
+                app:layout_constraintEnd_toStartOf="@id/img_rollback"
                 app:layout_constraintStart_toEndOf="@id/edit_memo_title"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/img_rollback"
+                android:src="@drawable/ic_refresh"
+                android:layout_width="50dp"
+                android:layout_height="0dp"
+                android:padding="10dp"
+                android:tint="@color/tint_rollback"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/tv_save"
+                app:layout_constraintStart_toEndOf="@id/edit_pw"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tv_save"
-                android:layout_width="wrap_content"
+                android:layout_width="50dp"
                 android:layout_height="0dp"
                 android:gravity="center_vertical"
                 android:paddingStart="10dp"
@@ -52,7 +64,7 @@
                 android:text="@string/save"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/edit_pw"
+                app:layout_constraintStart_toEndOf="@id/img_rollback"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,6 +2,7 @@ package com.sandorln.memoapp.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.sandorln.memoapp.databinding.ItemMemoBinding
@@ -14,11 +15,16 @@ class MemoAdapter(private val onClickListener: (Memo) -> Unit) : ListAdapter<Mem
 
     override fun onBindViewHolder(holder: MemoViewHolder, position: Int) {
         val memo = getItem(position)
-        if (memo.pwd.isNotEmpty())
-            holder.binding.tvMemo.text = "비밀 메모입니다"
-        else
-            holder.binding.tvMemo.text = memo.title
-        holder.itemView.setOnClickListener { onClickListener(memo) }
+        val isPrivateMemo = memo.pwd.isNotEmpty()
+//        val context = holder.binding.root.context
+//        ContextCompat.getColor(context, R.color.bg_memo_card)
+        with(holder.binding) {
+            imgMemoLockState.isVisible = isPrivateMemo
+            card.isSelected = isPrivateMemo
+            tvMemoTitle.text = if (isPrivateMemo) "비밀 메모" else memo.title
+            tvMemoContent.text = if (isPrivateMemo) "" else memo.content
+            root.setOnClickListener { onClickListener(memo) }
+        }
     }
 
     class MemoViewHolder(val binding: ItemMemoBinding) : RecyclerView.ViewHolder(binding.root)

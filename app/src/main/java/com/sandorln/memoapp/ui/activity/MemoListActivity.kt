@@ -6,6 +6,9 @@ import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.google.android.flexbox.FlexWrap
+import com.google.android.flexbox.FlexboxLayoutManager
+import com.google.android.flexbox.JustifyContent
 import com.sandorln.memoapp.R
 import com.sandorln.memoapp.databinding.ActivityMemoListBinding
 import com.sandorln.memoapp.ui.adapter.MemoAdapter
@@ -33,6 +36,10 @@ class MemoListActivity : BaseActivity<ActivityMemoListBinding>(R.layout.activity
 
     override fun initViewSetting() {
         binding.fabWriteMemo.setOnClickListener { startActivity(Intent(this, MemoEditorActivity::class.java)) }
+        binding.rvMemo.layoutManager = FlexboxLayoutManager(this).apply {
+            flexWrap = FlexWrap.WRAP
+            justifyContent = JustifyContent.FLEX_START
+        }
         binding.rvMemo.adapter = memoAdapter
         binding.editSearch.doOnTextChanged { text, _, _, _ -> memoViewModel.changeSearch(text.toString()) }
     }

@@ -14,6 +14,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -23,7 +24,7 @@ class MemoEditorViewModel @Inject constructor(
     private val insertMemoUseCase: InsertMemoUseCase,
     private val updateMemoUseCase: UpdateMemoUseCase
 ) : AndroidViewModel(context as Application) {
-    fun saveMemo() = viewModelScope.launch(Dispatchers.IO) {
+    suspend fun saveMemo() = withContext(Dispatchers.IO) {
         val title = _memoTitle.first()
         val content = _memoContent.first()
         val pwd = _memoPw.first()
