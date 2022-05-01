@@ -10,6 +10,7 @@ class MemoRepositoryImpl @Inject constructor(
 ) : MemoRepository {
     override fun getMemoList(search: String): Flow<List<Memo>> = memoDao.getMemoList(search)
     override suspend fun getMemoById(memoId: String): Memo = memoDao.getMemoById(memoId)
+    override suspend fun checkValidMemoPw(memoId: String, memoPw: String): Boolean = memoDao.checkValidMemoPw(memoId, memoPw) != null
 
     override suspend fun insertMemo(memo: Memo) = memoDao.insertMemo(memo)
     override suspend fun deleteMemo(memo: Memo) = memoDao.deleteMemo(memo)

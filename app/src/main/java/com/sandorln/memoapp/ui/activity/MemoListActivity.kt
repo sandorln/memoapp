@@ -13,6 +13,7 @@ import com.sandorln.memoapp.R
 import com.sandorln.memoapp.databinding.ActivityMemoListBinding
 import com.sandorln.memoapp.ui.adapter.MemoAdapter
 import com.sandorln.memoapp.ui.base.BaseActivity
+import com.sandorln.memoapp.ui.dialog.CheckMemoPwValidDialog
 import com.sandorln.memoapp.viewmodel.MemoViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -29,8 +30,14 @@ class MemoListActivity : BaseActivity<ActivityMemoListBinding>(R.layout.activity
 
     override fun initObjectSetting() {
         memoAdapter = MemoAdapter { memo ->
-            val intent = Intent(this, MemoDetailActivity::class.java).apply { putExtra("memoId", memo.id.toString()) }
-            startActivity(intent)
+            if (memo.pwd.isEmpty()) {
+                val intent = Intent(this, MemoDetailActivity::class.java).apply { putExtra("memoId", memo.id.toString()) }
+                startActivity(intent)
+            } else {
+                CheckMemoPwValidDialog
+                    .newInstance(memo.id.toString())
+                    .show(supportFragmentManager, "CheckMemoPwValidDialog")
+            }
         }
     }
 

@@ -9,4 +9,5 @@ interface MemoRepository {
     suspend fun deleteMemo(memo: Memo)
     suspend fun updateMemo(memo: Memo)
     suspend fun getMemoById(memoId: String): Memo
+    suspend fun checkValidMemoPw(memoId: String, memoPw: String): Boolean
 }

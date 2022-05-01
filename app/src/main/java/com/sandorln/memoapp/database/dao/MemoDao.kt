@@ -21,4 +21,7 @@ interface MemoDao {
 
     @Query("SELECT * FROM Memo WHERE id == :id")
     fun getMemoById(id: String): Memo
+
+    @Query("SELECT * FROM Memo WHERE id == :id AND pwd == :pw")
+    fun checkValidMemoPw(id: String, pw: String) : Memo?
 }

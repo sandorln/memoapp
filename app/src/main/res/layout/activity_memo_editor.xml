@@ -14,17 +14,21 @@
             app:layout_constraintVertical_bias="0"
             app:layout_constraintVertical_chainStyle="packed">
 
-            <androidx.appcompat.widget.AppCompatEditText
+            <com.sandorln.memoapp.ui.custom.ClearFocusEditText
                 android:id="@+id/edit_memo_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:ellipsize="end"
                 android:hint="@string/input_title"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:maxLines="1"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/edit_pw"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.appcompat.widget.AppCompatEditText
+            <com.sandorln.memoapp.ui.custom.ClearFocusEditText
                 android:id="@+id/edit_pw"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
@@ -44,10 +48,10 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/img_rollback"
-                android:src="@drawable/ic_refresh"
                 android:layout_width="50dp"
                 android:layout_height="0dp"
                 android:padding="10dp"
+                android:src="@drawable/ic_refresh"
                 android:tint="@color/tint_rollback"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/tv_save"
@@ -78,7 +82,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/layout_top">
 
-            <androidx.appcompat.widget.AppCompatEditText
+            <com.sandorln.memoapp.ui.custom.ClearFocusEditText
                 android:id="@+id/edit_memo_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

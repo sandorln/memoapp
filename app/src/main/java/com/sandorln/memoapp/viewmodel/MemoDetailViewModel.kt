@@ -16,7 +16,7 @@ class MemoDetailViewModel @Inject constructor(
     @ApplicationContext context: Context,
     savedStateHandle: SavedStateHandle,
     getMemoByIdUseCase: GetMemoByIdUseCase,
-    private val deleteMemoUseCase: DeleteMemoUseCase
+    private val deleteMemoUseCase: DeleteMemoUseCase,
 ) : AndroidViewModel(context as Application) {
     val memo = getMemoByIdUseCase(savedStateHandle.get<String>("memoId") ?: "")
     suspend fun deleteMemo() = deleteMemoUseCase(memo = memo.first())

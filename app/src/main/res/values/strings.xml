@@ -9,4 +9,5 @@
     <string name="modify">편집</string>
     <string name="memo_lock_state">메모 비공개/공개</string>
     <string name="delete">삭제</string>
+    <string name="confirm">확인</string>
 </resources>

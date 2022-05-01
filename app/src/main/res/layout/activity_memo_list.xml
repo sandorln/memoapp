@@ -6,6 +6,8 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         tools:context=".MemoListActivity">
 
         <com.google.android.material.appbar.AppBarLayout
@@ -20,7 +22,7 @@
                 app:layout_constraintBottom_toTopOf="@id/rv_memo"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.sandorln.memoapp.ui.custom.ClearFocusEditText
                     android:id="@+id/edit_search"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />

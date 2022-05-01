@@ -1,5 +1,7 @@
 package com.sandorln.memoapp.ui.activity
 
+import android.content.Context
+import android.view.inputmethod.InputMethodManager
 import androidx.activity.viewModels
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.Lifecycle
@@ -33,11 +35,15 @@ class MemoEditorActivity : BaseActivity<ActivityMemoEditorBinding>(R.layout.acti
                 finish()
                 if (memoEditorViewModel.initMemo.value != null)
                     overridePendingTransition(0, 0)
+
+                showToast("완료 되었습니다")
             }
         }
         binding.imgRollback.setOnClickListener {
             showAlterDialog("초기화", "이전 내용으로 되돌립니다", "되돌리기") {
                 initMemoRollback()
+                binding.root.clearFocus()
+                (getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager)?.hideSoftInputFromWindow(binding.root.windowToken, 0)
             }
         }
     }

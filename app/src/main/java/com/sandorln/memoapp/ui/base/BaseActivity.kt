@@ -6,6 +6,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import com.sandorln.memoapp.application.MemoAppApplication
 
 abstract class BaseActivity<T : ViewDataBinding>(@LayoutRes private val layoutId: Int) : AppCompatActivity() {
     lateinit var binding: T
@@ -34,4 +35,6 @@ abstract class BaseActivity<T : ViewDataBinding>(@LayoutRes private val layoutId
             .setNegativeButton("취소") { dialog, _ -> dialog.dismiss() }
             .create()
             .show()
+
+    fun showToast(message: String) = (applicationContext as? MemoAppApplication)?.showToast(message)
 }
